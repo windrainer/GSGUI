@@ -6,11 +6,52 @@
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="css/samples.css" />
 <link rel="stylesheet" href="css/my.css" />
+<script src="lib/jquery/jquery-1.9.1.min.js"></script>
+<script src="lib/jquery/jquery.form.js"></script>
+<script src="lib/jquery/jquery.validate.min.js"></script>
+<script>
+
+$(function() {
+	validateAndLogin();
+});
+
+function validateAndLogin() {
+	$("#loginForm").validate({
+		submitHandler:function(form) {
+			$(form).ajaxSubmit({
+				beforeSubmit : function() { alert("about to submit")},
+			  url: 'doLogin.action',
+			  type: "post",
+			  timeout: 10000
+		  });
+		},
+	
+		rules : {
+			"username" : {
+				required : true,
+			},
+			
+			"password" : {
+				required : true
+			}
+		}	  
+	});
+};
+
+function onSubmit() {
+	$("#loginForm").submit();
+}
+
+var afterLogin=function(response, statusText) {
+	alert("you are logged in!");
+}
+
+</script>
 <title>GSUI Login</title>
 </head>
 <body>
 	<div class="container">
-		<form class="form-inline" action="doLogin" method="post" role="form">
+		<form class="form-inline" id="loginForm" role="form">
 			<div class="row top-margin-20">
 				<div class="col-xs-6 col-md-offset-3"
 					style="background-color: #dedef8; box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">
@@ -20,8 +61,7 @@
 								id="username" class="form-control" type="text" name="username"></li>
 							<li><label for="password">Password:</label> <input
 								id="password" class="form-control" type="password" name="password"></li>
-							<li><input type="submit" class="btn btn-default"
-								name="submit" /></li>
+							<li><input type="button" class="btn btn-default" value="Submit" onClick="onSubmit()"></li>
 						</ul>
 					</div>
 				</div>

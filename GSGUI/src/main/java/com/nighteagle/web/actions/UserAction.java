@@ -15,7 +15,7 @@ public class UserAction extends BaseAction {
 	
 	private String password;
 	
-	@Action(value="doLogin", results={@Result(name=SUCCESS, location="/pages/index.html"),@Result(name=ERROR, location="/pages/login.jsp")})
+	@Action(value="doLogin", results={@Result(name=SUCCESS, location="/pages/index.html"),@Result(name=ERROR, location="/pages/login.html")})
 	public String doLogin() {
 		if(username.equals("admin") && password.equals("admin")) {
 			return SUCCESS;

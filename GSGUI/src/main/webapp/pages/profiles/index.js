@@ -1,5 +1,5 @@
 define(function() {
 	return {
-		username: 'Sen Gao'
+		username: "Sen Gao"
 	};
 });
